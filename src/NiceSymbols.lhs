@@ -252,9 +252,9 @@ niceRender w (_nm, nm)
  = _nm ++ (replicate (w-length _nm) ' ') ++ "  " ++ nm
 \end{code}
 
-Use \verb"main" in GHCi to see the available strings and functions.
+Use \verb"help" in GHCi to see the available strings and functions.
 \begin{code}
-main
+help
  = do putStrLn ("Nice Symbols v"++versionNS++" listing:")
       putStrLn $ unlines $ map (niceRender maxw) nice
  where maxw = maximum $ map (length . fst) nice
