@@ -14,11 +14,12 @@ module
   , _parallel, _Cap
   , _overline
   , _supStr, _supNum 
+  , _mathcal
   ) 
 where
 import Data.Char
 
-versionNS = "0.2.0"
+versionNS = "0.2.1"
 \end{code}
 
 
@@ -155,7 +156,19 @@ _supChar c
 
 _supStr s = map _supChar s
 _supNum n = _supStr $ show n
-#endif
+
+-- _mathcal 'B' = '\x212c' -- not great!
+_mathcal 'E' = '\x2130'
+-- _mathcal 'F' = '\x2131'
+-- _mathcal 'H' = '\x210b'
+-- _mathcal 'I' = '\x2110'
+-- _mathcal 'L' = '\x2112'
+-- _mathcal 'M' = '\x2133'
+-- _mathcal 'R' = '\x211b'
+_mathcal c
+ | isUpper c  =  chr (ord c - ord 'A' + 0x1d4d0)
+ | otherwise  =  c
+ #endif
 \end{code}
 
 
@@ -203,6 +216,7 @@ _overline str = "ovl("++str++")"
 _supStr = ('^':)
 _supNum n = _supStr $ show n
 
+_mathcal c  =  c
 #endif
 \end{code}
 
