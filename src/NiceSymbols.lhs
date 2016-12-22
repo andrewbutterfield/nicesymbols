@@ -2,10 +2,23 @@
 
 \begin{code}
 {-# LANGUAGE CPP #-}
-module NiceSymbols where
+module 
+ NiceSymbols
+  ( mathBold, mathSansBold, flags 
+  , bold, overline
+  , _ll, _gg
+  , _alpha, _pi, _epsilon, _tau, _Sigma
+  , _top, _bot, _sqcap, _sqcup, _sqsubseteq
+  , _true , _false , _lnot, _land, _lor, _implies, _equiv 
+  , _emptyset, _cup, _cap, _setminus, _in, _subseteq 
+  , _parallel, _Cap
+  , _overline
+  , _supStr, _supNum 
+  ) 
+where
 import Data.Char
 
-versionNS = "0.1.1"
+versionNS = "0.2.0"
 \end{code}
 
 
