@@ -1,32 +1,13 @@
-\documentclass{article}
-\usepackage{verbatim}
-
-\parindent=0pt
-\parskip=3pt
-
-\def\versionNS{0.1.0.0}
-
-\author{Andrew Butterfield\\Trinity College Dublin}
-\title{Nice Symbols v\versionNS}
-\date\today
-
-\newenvironment{code}%
-  {\verbatim}%
-  {\endverbatim}
-
-\begin{document}
-
-\maketitle
+\section{Introduction}
 
 \begin{code}
 {-# LANGUAGE CPP #-}
 module NiceSymbols where
 import Data.Char
 
-versionNS = "0.1.0.0"
+versionNS = "0.1.0"
 \end{code}
 
-\section{Introduction}
 
 We define some nice symbols using unicode, for non-Windows usage,
 along with dull ASCII equivalents for Windows users.
@@ -154,7 +135,7 @@ _overline str = "\ESC[9m"++follow str '\x35e'++"\ESC[0m"
 
 _supChar '2' = '\178'
 _supChar '3' = '\179'
-_supChar c 
+_supChar c
   | isDigit c = chr (ord c - ord '0' + 8304)
   | isSpace c = c
   | otherwise = '\175'
@@ -259,5 +240,3 @@ help
       putStrLn $ unlines $ map (niceRender maxw) nice
  where maxw = maximum $ map (length . fst) nice
 \end{code}
-
-\end{document}
