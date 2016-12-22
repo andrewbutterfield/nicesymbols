@@ -5,7 +5,7 @@
 module NiceSymbols where
 import Data.Char
 
-versionNS = "0.1.0"
+versionNS = "0.1.1"
 \end{code}
 
 
@@ -56,7 +56,7 @@ styleShift code_A code_a c
 mathBold     = map $ styleShift 119808 119834
 mathSansBold = map $ styleShift 120276 120302
 flags        = map $ styleShift 127462 127462
-test = map $ styleShift 119886 119886
+test = putStrLn . map (styleShift 119886 119886)
 \end{code}
 
 \newpage
@@ -74,7 +74,7 @@ boldSGR  = eSGR 1
 ovlSGR   = eSGR 9
 
 bold str = boldSGR ++ str ++ resetSGR
-overline c = ovlSGR ++ c:resetSGR
+overline str = ovlSGR ++ str ++ resetSGR 
 #endif
 \end{code}
 
@@ -200,7 +200,9 @@ _supNum n = _supStr $ show n
 Basically a catalog of our nice symbols that is easy to display in GHCi
 \begin{code}
 nice
- = [ ("_ll", _ll)
+ = [ ("bold(string)", bold "string" )
+   , ("overline(string)", overline "string" )
+   , ("_ll", _ll)
    , ("_gg", _gg)
    , ("_pi", _pi)
    , ("_epsilon", _epsilon)
@@ -225,7 +227,7 @@ nice
    , ("_subseteq", _subseteq)
    , ("_parallel", _parallel)
    , ("_Cap", _Cap)
-   , ("_overline(p)", _overline "p")
+   , ("_overline(string)", _overline "string")
    , ("_supNum(42)", _supNum 42)
    ]
 
