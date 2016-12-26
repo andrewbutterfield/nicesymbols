@@ -11,7 +11,9 @@ module
   , _top, _bot, _sqcap, _sqcup, _sqsubseteq
   , _true , _false , _lnot, _land, _lor, _implies, _equiv 
   , _emptyset, _cup, _cap, _setminus, _in, _subseteq 
+  , _langle, _rangle
   , _parallel, _Cap
+  , _infty, _star
   , _overline
   , _supStr, _supNum 
   , _mathcal
@@ -19,7 +21,7 @@ module
 where
 import Data.Char
 
-versionNS = "0.2.2"
+versionNS = "0.2.3"
 \end{code}
 
 
