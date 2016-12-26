@@ -19,7 +19,7 @@ module
 where
 import Data.Char
 
-versionNS = "0.2.1"
+versionNS = "0.2.2"
 \end{code}
 
 
@@ -139,16 +139,67 @@ _setminus = "\8726"
 _in = "\8712"
 _subseteq = "\8838"
 
+_langle = "\x27e8"
+_rangle = "\x27e9"
+
 _parallel = "\8214"
 _Cap = "\8914"
+
+_infty = "\x221e"
+_star = "\9733"
 \end{code}
 
 \newpage
 \begin{code}
 _overline str = "\ESC[9m"++follow str '\x35e'++"\ESC[0m"
 
+_supChar '1' = '\185'
 _supChar '2' = '\178'
 _supChar '3' = '\179'
+
+_supChar 'A' = '\7468'
+_supChar 'B' = '\7470'
+_supChar 'D' = '\7472'
+_supChar 'E' = '\7473'
+
+_supChar 'a' = '\7491'
+_supChar 'b' = '\7495'
+_supChar 'c' = '\7580'
+_supChar 'd' = '\7496'
+_supChar 'e' = '\7497'
+_supChar 'f' = '\7584'
+_supChar 'g' = '\7501'
+_supChar 'h' = '\688'
+_supChar 'i' = '\8305'
+_supChar 'j' = '\690'
+_supChar 'k' = '\7503'
+_supChar 'l' = '\737'
+_supChar 'm' = '\7504'
+_supChar 'n' = '\8319'
+_supChar 'o' = '\7506'
+_supChar 'p' = '\7510'
+-- no q !
+_supChar 'r' = '\691'
+_supChar 's' = '\738'
+_supChar 't' = '\7511'
+_supChar 'u' = '\7512'
+_supChar 'v' = '\7515'
+_supChar 'w' = '\695' -- also '\7514'
+_supChar 'x' = '\739'
+_supChar 'y' = '\696'
+_supChar 'z' = '\7611'
+
+_supChar '+' = '\8314'
+_supChar '-' = '\8315'
+_supChar '(' = '\8317'
+_supChar ')' = '\8318'
+
+_supChar ',' = ','
+_supChar '*' = '*'
+_supChar '\x221e' = '\x221e'  -- infty
+_supChar '\120596' = '\7514'  -- omega
+_supChar '\9733' = '*'    -- star
+
 _supChar c
   | isDigit c = chr (ord c - ord '0' + 8304)
   | isSpace c = c
@@ -208,8 +259,14 @@ _setminus = "\\"
 _in = "in"
 _subseteq = "subset"
 
+_langle = "<"
+_rangle = ">
+
 _parallel = "||"
 _Cap = "II"
+
+_infty = "inf"
+_star = "*"
 
 _overline str = "ovl("++str++")"
 
@@ -252,9 +309,14 @@ nice
    , ("_setminus", _setminus)
    , ("_in", _in)
    , ("_subseteq", _subseteq)
+   , ("_langle", _langle)
+   , ("_rangle", _rangle)
    , ("_parallel", _parallel)
    , ("_Cap", _Cap)
+   , ("_infty", _infty)
+   , ("_star", _star)
    , ("_overline(string)", _overline "string")
+   , ("_supStr(\"aBcd\")", _supStr("aBcD"))
    , ("_supNum(42)", _supNum 42)
    ]
 
