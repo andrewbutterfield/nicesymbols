@@ -7,7 +7,7 @@ module
   ( mathBold, mathSansBold, flags 
   , bold, overline
   , _ll, _gg
-  , _alpha, _pi, _epsilon, _tau, _Sigma
+  , _alpha, _pi, _epsilon, _tau, _Sigma, _omega
   , _top, _bot, _sqcap, _sqcup, _sqsubseteq
   , _true , _false , _lnot, _land, _lor, _implies, _equiv 
   , _emptyset, _cup, _cap, _setminus, _in, _subseteq 
@@ -21,7 +21,7 @@ module
 where
 import Data.Char
 
-versionNS = "0.2.3"
+versionNS = "0.2.4"
 \end{code}
 
 
@@ -119,6 +119,7 @@ _pi = "\x03C0"
 _epsilon = "\x03F5"
 _tau = "\x03C4"
 _Sigma = "\x2211"
+_omega = "\x1d714"
 
 _top = "\x22A4"
 _bot = "\x22A5"
@@ -239,6 +240,7 @@ _pi = "pi"
 _epsilon = "eps"
 _tau = "tau"
 _Sigma = "Sigma"
+_omega = "omega"
 
 _top = "T"
 _bot = "_|_"
@@ -294,6 +296,7 @@ nice
    , ("_epsilon", _epsilon)
    , ("_tau", _tau)
    , ("_Sigma", _Sigma)
+   , ("_omega", _omega)
    , ("_top", _top)
    , ("_bot", _bot)
    , ("_sqcap", _sqcap)
