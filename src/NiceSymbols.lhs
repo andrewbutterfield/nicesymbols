@@ -2,26 +2,27 @@
 
 \begin{code}
 {-# LANGUAGE CPP #-}
-module 
+module
  NiceSymbols
-  ( mathBold, mathSansBold, flags 
+  ( mathBold, mathSansBold, flags
   , bold, overline
   , _ll, _gg
   , _alpha, _pi, _epsilon, _tau, _Sigma, _omega
   , _top, _bot, _sqcap, _sqcup, _sqsubseteq
-  , _true , _false , _lnot, _land, _lor, _implies, _equiv 
-  , _emptyset, _cup, _cap, _setminus, _in, _subseteq 
+  , _true , _false , _lnot, _land, _lor, _implies, _equiv
+  , _emptyset, _cup, _cap, _setminus, _in, _subseteq, _varnothing
   , _langle, _rangle
   , _parallel, _Cap
   , _infty, _star
   , _overline
-  , _supStr, _supNum 
+  , _supStr, _supNum
   , _mathcal
-  ) 
+  , help
+  )
 where
 import Data.Char
 
-versionNS = "0.2.4"
+versionNS = "0.2.5"
 \end{code}
 
 
@@ -90,7 +91,7 @@ boldSGR  = eSGR 1
 ovlSGR   = eSGR 9
 
 bold str = boldSGR ++ str ++ resetSGR
-overline str = ovlSGR ++ str ++ resetSGR 
+overline str = ovlSGR ++ str ++ resetSGR
 #endif
 \end{code}
 
@@ -135,12 +136,13 @@ _lor = "\8744"
 _implies = "\8658"
 _equiv = "\8801"
 
-_emptyset = "\8709"
+_emptyset = "\216"
 _cup = "\8746"
 _cap = "\8745"
 _setminus = "\8726"
 _in = "\8712"
 _subseteq = "\8838"
+_varnothing = "\8709"
 
 _langle = "\x27e8"
 _rangle = "\x27e9"
@@ -262,6 +264,7 @@ _cap = "I"
 _setminus = "\\"
 _in = "in"
 _subseteq = "subset"
+_varnothing = "()"
 
 _langle = "<"
 _rangle = ">
@@ -314,6 +317,7 @@ nice
    , ("_setminus", _setminus)
    , ("_in", _in)
    , ("_subseteq", _subseteq)
+   , ("_varnothing", _varnothing)
    , ("_langle", _langle)
    , ("_rangle", _rangle)
    , ("_parallel", _parallel)
@@ -321,8 +325,9 @@ nice
    , ("_infty", _infty)
    , ("_star", _star)
    , ("_overline(string)", _overline "string")
-   , ("_supStr(\"aBcd\")", _supStr("aBcD"))
-   , ("_supNum(42)", _supNum 42)
+   , ( "_supStr(\"abcdijklmnABCDIJKLMN\")"
+      , _supStr( "abcdijklmnABCDIJKLMN"))
+   , ("_supNum(9876543210)", _supNum 9876543210)
    ]
 
 niceRender w (_nm, nm)
