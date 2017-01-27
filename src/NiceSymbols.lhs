@@ -14,16 +14,17 @@ module
   , _langle, _rangle
   , _parallel, _Cap
   , _infty, _star
+  , _bullet, _fun, _pfun, _ffun, _maplet, _times
   , _overline
   , _supStr, _supNum
-  , _mathcal
+  , _mathcal, cmathcal, _mathbb, cmathbb
   , help
   )
 where
 import Data.Char
 import Numeric
 
-versionNS = "0.2.6"
+versionNS = "0.3.0"
 \end{code}
 
 
@@ -149,10 +150,17 @@ _langle = "\x27e8"
 _rangle = "\x27e9"
 
 _parallel = "\x2016"
-_Cap = "\8914"
+_Cap = "\x22d2"
 
 _infty = "\x221e"
-_star = "\x22d2"
+_star = "\x2605"
+
+_bullet = "\x2022"
+_fun = "\x2192"
+_pfun = "\x21f8"
+_ffun = "\x21fb"
+_maplet = "\x21a6"
+_times = "\x2a09"
 \end{code}
 
 \newpage
@@ -214,18 +222,35 @@ _supChar c
 _supStr s = map _supChar s
 _supNum n = _supStr $ show n
 
--- _mathcal 'B' = '\x212c' -- not great!
-_mathcal 'E' = '\x2130'
--- _mathcal 'F' = '\x2131'
--- _mathcal 'H' = '\x210b'
--- _mathcal 'I' = '\x2110'
--- _mathcal 'L' = '\x2112'
--- _mathcal 'M' = '\x2133'
--- _mathcal 'R' = '\x211b'
-_mathcal c
+_mathcal = map cmathcal
+
+-- cmathcal 'B' = '\x212c' -- not great!
+cmathcal 'E' = '\x2130'
+-- cmathcal 'F' = '\x2131'
+-- cmathcal 'H' = '\x210b'
+-- cmathcal 'I' = '\x2110'
+-- cmathcal 'L' = '\x2112'
+-- cmathcal 'M' = '\x2133'
+-- cmathcal 'R' = '\x211b'
+cmathcal c
  | isUpper c  =  chr (ord c - ord 'A' + 0x1d4d0)
  | otherwise  =  c
  #endif
+
+_mathbb = map cmathbb
+
+cmathbb 'C' = '\x2102'
+cmathbb 'H' = '\x210d'
+cmathbb 'N' = '\x2115'
+cmathbb 'P' = '\x2119'
+cmathbb 'Q' = '\x211a'
+cmathbb 'R' = '\x211d'
+cmathbb 'Z' = '\x2124'
+cmathbb c
+ | isUpper c  =  chr (ord c - ord 'A' + 0x1d538)
+ | isLower c  =  chr (ord c - ord 'a' + 0x1d552)
+ | isDigit c  =  chr (ord c - ord '0' + 0x1d7d8)
+ | otherwise  =  c
 \end{code}
 
 
@@ -276,12 +301,21 @@ _Cap = "II"
 _infty = "inf"
 _star = "*"
 
+_bullet = "@"
+_fun = "->"
+_pfun = "-+>"
+_ffun = "-++>"
+_maplet = "|->"
+_times = "x"
+
 _overline str = "ovl("++str++")"
 
 _supStr = ('^':)
 _supNum n = _supStr $ show n
 
-_mathcal c  =  c
+_mathcal str = str
+
+_mathbb  str = str
 #endif
 \end{code}
 
@@ -323,12 +357,22 @@ niceSyms
    , ("_Cap", _Cap)
    , ("_infty", _infty)
    , ("_star", _star)
+   , ("_bullet", _bullet)
+   , ("_fun", _fun)
+   , ("_pfun", _pfun)
+   , ("_ffun", _ffun)
+   , ("_maplet", _maplet)
+   , ("_times", _times)
    ]
 
+aLower = ['a'..'z']
+aUpper = ['A'..'Z']
 niceFuns
  = [ ("bold(string)", bold "string" )
    , ("overline(string)", overline "string" )
    , ("_overline(string)", _overline "string")
+   , ("_mathcal('A'..'Z')", _mathcal aUpper )
+   , ("_mathbb('A'..'9')", _mathbb (aUpper++"abyz0189") )
    , ( "_supStr(\"abcdijklmnABCDIJKLMN\")"
       , _supStr( "abcdijklmnABCDIJKLMN"))
    , ("_supNum(9876543210)", _supNum 9876543210)
@@ -339,7 +383,9 @@ niceRender w (_nm, nm@[uc])
 niceRender w (_nm, nm)
  = _nm ++ (replicate (w-length _nm) ' ') ++ "  " ++ nm
 
-hexRender uc = hexPad $ showHex (ord uc) ""
+hex i = showHex i ""
+
+hexRender uc = hexPad $ hex $ ord uc
 
 hexPad hstr
  | len <= 4  =  pad4 len hstr
@@ -357,7 +403,7 @@ help
       putStrLn $ unlines $ map (niceRender maxw1) niceSyms
       putStrLn ("Nice Functions v"++versionNS++" listing:")
       putStrLn $ unlines $ map (niceRender maxw2) niceFuns
- where 
+ where
    maxw1 = maximum $ map (length . fst) niceSyms
    maxw2 = maximum $ map (length . fst) niceFuns
 \end{code}
