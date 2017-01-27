@@ -21,6 +21,7 @@ module
   )
 where
 import Data.Char
+import Numeric
 
 versionNS = "0.2.6"
 \end{code}
@@ -290,10 +291,8 @@ _mathcal c  =  c
 
 Basically a catalog of our nice symbols that is easy to display in GHCi
 \begin{code}
-nice
- = [ ("bold(string)", bold "string" )
-   , ("overline(string)", overline "string" )
-   , ("_ll", _ll)
+niceSyms
+ = [ ("_ll", _ll)
    , ("_gg", _gg)
    , ("_pi", _pi)
    , ("_epsilon", _epsilon)
@@ -324,20 +323,41 @@ nice
    , ("_Cap", _Cap)
    , ("_infty", _infty)
    , ("_star", _star)
+   ]
+
+niceFuns
+ = [ ("bold(string)", bold "string" )
+   , ("overline(string)", overline "string" )
    , ("_overline(string)", _overline "string")
    , ( "_supStr(\"abcdijklmnABCDIJKLMN\")"
       , _supStr( "abcdijklmnABCDIJKLMN"))
    , ("_supNum(9876543210)", _supNum 9876543210)
    ]
 
+niceRender w (_nm, nm@[uc])
+ = _nm ++ (replicate (w-length _nm) ' ') ++ "  " ++ nm ++ "   " ++ hexRender uc
 niceRender w (_nm, nm)
  = _nm ++ (replicate (w-length _nm) ' ') ++ "  " ++ nm
+
+hexRender uc = hexPad $ showHex (ord uc) ""
+
+hexPad hstr
+ | len <= 4  =  pad4 len hstr
+ | len <= 8  =  pad4 (len-4) hleft ++ ' ':hright
+ where
+   len = length hstr
+   pad4 l str = (replicate (4-l) '0') ++ str
+   (hleft,hright) = splitAt (len-4) hstr
 \end{code}
 
 Use \verb"help" in GHCi to see the available strings and functions.
 \begin{code}
 help
  = do putStrLn ("Nice Symbols v"++versionNS++" listing:")
-      putStrLn $ unlines $ map (niceRender maxw) nice
- where maxw = maximum $ map (length . fst) nice
+      putStrLn $ unlines $ map (niceRender maxw1) niceSyms
+      putStrLn ("Nice Functions v"++versionNS++" listing:")
+      putStrLn $ unlines $ map (niceRender maxw2) niceFuns
+ where 
+   maxw1 = maximum $ map (length . fst) niceSyms
+   maxw2 = maximum $ map (length . fst) niceFuns
 \end{code}
