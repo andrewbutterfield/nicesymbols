@@ -22,7 +22,7 @@ module
 where
 import Data.Char
 
-versionNS = "0.2.5"
+versionNS = "0.2.6"
 \end{code}
 
 
@@ -112,10 +112,10 @@ overline str = '^':str++"^"
 \begin{code}
 #ifndef mingw32_HOST_OS
 
-_ll = "\171"
-_gg = "\187"
+_ll = "\x00ab"
+_gg = "\x00bb"
 
-_alpha = "\945"
+_alpha = "\x03b1"
 _pi = "\x03C0"
 _epsilon = "\x03F5"
 _tau = "\x03C4"
@@ -124,34 +124,34 @@ _omega = "\x1d714"
 
 _top = "\x22A4"
 _bot = "\x22A5"
-_sqcap = "\8851"
-_sqcup = "\8852"
-_sqsubseteq = "\8849"
+_sqcap = "\x2293"
+_sqcup = "\x2294"
+_sqsubseteq = "\x2291"
 
 _true = bold "true"
 _false = bold "false"
-_lnot = "\172"
-_land = "\8743"
-_lor = "\8744"
-_implies = "\8658"
-_equiv = "\8801"
+_lnot = "\x00ac"
+_land = "\x2227"
+_lor = "\x2228"
+_implies = "\x21d2"
+_equiv = "\x2261"
 
-_emptyset = "\216"
-_cup = "\8746"
-_cap = "\8745"
-_setminus = "\8726"
-_in = "\8712"
-_subseteq = "\8838"
-_varnothing = "\8709"
+_emptyset = "\x00d8"
+_cup = "\x222a"
+_cap = "\x2229"
+_setminus = "\x2216"
+_in = "\x2208"
+_subseteq = "\x2286"
+_varnothing = "\x2205"
 
 _langle = "\x27e8"
 _rangle = "\x27e9"
 
-_parallel = "\8214"
+_parallel = "\x2016"
 _Cap = "\8914"
 
 _infty = "\x221e"
-_star = "\9733"
+_star = "\x22d2"
 \end{code}
 
 \newpage
@@ -202,11 +202,11 @@ _supChar ')' = '\8318'
 _supChar ',' = ','
 _supChar '*' = '*'
 _supChar '\x221e' = '\x221e'  -- infty
-_supChar '\120596' = '\7514'  -- omega
+_supChar '\120596' = '\x1d5a'  -- omega
 _supChar '\9733' = '*'    -- star
 
 _supChar c
-  | isDigit c = chr (ord c - ord '0' + 8304)
+  | isDigit c = chr (ord c - ord '0' + 0x2070)
   | isSpace c = c
   | otherwise = '\175'
 
