@@ -7,10 +7,13 @@ module
   ( mathBold, mathSansBold, flags
   , bold, overline
   , _ll, _gg
-  , _alpha, _pi, _epsilon, _tau, _Sigma, _omega
-  , _top, _bot, _sqcap, _sqcup, _sqsubseteq
+  , _alpha, _theta, _iota, _mu, _pi
+  , _epsilon, _tau, _Sigma, _omega
+  , _top, _bot, _sqcap, _sqcup, _sqsubseteq, _lhd, _rhd
   , _true , _false , _lnot, _land, _lor, _implies, _equiv
-  , _emptyset, _cup, _cap, _setminus, _in, _subseteq, _varnothing
+  , _forall, _exists
+  , _emptyset, _cup, _cap, _setminus
+  , _in, _subseteq, _varnothing
   , _langle, _rangle
   , _parallel, _Cap
   , _infty, _star
@@ -24,7 +27,7 @@ where
 import Data.Char
 import Numeric
 
-versionNS = "0.3.0"
+versionNS = "0.3.1"
 \end{code}
 
 
@@ -118,17 +121,22 @@ _ll = "\x00ab"
 _gg = "\x00bb"
 
 _alpha = "\x03b1"
-_pi = "\x03C0"
-_epsilon = "\x03F5"
-_tau = "\x03C4"
+_theta = "\x03b8"
+_iota = "\x03b9"
+_mu = "\x03bc"
+_pi = "\x03c0"
+_epsilon = "\x03f5"
+_tau = "\x03c4"
 _Sigma = "\x2211"
 _omega = "\x1d714"
 
-_top = "\x22A4"
-_bot = "\x22A5"
+_top = "\x22a4"
+_bot = "\x22a5"
 _sqcap = "\x2293"
 _sqcup = "\x2294"
 _sqsubseteq = "\x2291"
+_lhd = "\x25c1"
+_rhd = "\x25b7"
 
 _true = bold "true"
 _false = bold "false"
@@ -137,6 +145,9 @@ _land = "\x2227"
 _lor = "\x2228"
 _implies = "\x21d2"
 _equiv = "\x2261"
+
+_forall = "\x2200"
+_exists = "\x2203"
 
 _emptyset = "\x00d8"
 _cup = "\x222a"
@@ -264,6 +275,9 @@ _ll = "<<"
 _gg = ">>"
 
 _alpha = "alf"
+_theta = "theta"
+_iota = "iota"
+_mu = "mu"
 _pi = "pi"
 _epsilon = "eps"
 _tau = "tau"
@@ -275,6 +289,8 @@ _bot = "_|_"
 _sqcap = "|~|"
 _sqcup = "|_|"
 _sqsubseteq = "|="
+_lhd = "<|"
+_rhd = "|>"
 
 _true = "true"  -- bold true
 _false = "false" -- bold false
@@ -283,6 +299,9 @@ _land = "/\\"
 _lor = "\\/"
 _implies = "==>"
 _equiv = "=="
+
+_forall = "forall"
+_exists = "exists"
 
 _emptyset = "{}"
 _cup = "U"
