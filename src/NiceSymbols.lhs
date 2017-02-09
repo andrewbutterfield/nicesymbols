@@ -7,7 +7,7 @@ module
   ( mathBold, mathSansBold, flags
   , bold, overline
   , _ll, _gg
-  , _alpha, _theta, _iota, _mu, _pi
+  , _alpha, _beta, _theta, _iota, _mu, _pi
   , _epsilon, _tau, _Sigma, _omega
   , _top, _bot, _sqcap, _sqcup, _sqsubseteq, _lhd, _rhd
   , _true , _false , _lnot, _land, _lor, _implies, _equiv
@@ -27,7 +27,7 @@ where
 import Data.Char
 import Numeric
 
-versionNS = "0.3.1"
+versionNS = "0.3.2"
 \end{code}
 
 
@@ -121,14 +121,15 @@ _ll = "\x00ab"
 _gg = "\x00bb"
 
 _alpha = "\x03b1"
+_beta = "\x03b2"
 _theta = "\x03b8"
 _iota = "\x03b9"
 _mu = "\x03bc"
 _pi = "\x03c0"
 _epsilon = "\x03f5"
 _tau = "\x03c4"
-_Sigma = "\x2211"
-_omega = "\x1d714"
+_Sigma = "\x2211" -- "\x03a3" ?
+_omega = "\x03c9"
 
 _top = "\x22a4"
 _bot = "\x22a5"
@@ -275,6 +276,7 @@ _ll = "<<"
 _gg = ">>"
 
 _alpha = "alf"
+_beta = "beta"
 _theta = "theta"
 _iota = "iota"
 _mu = "mu"
