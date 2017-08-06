@@ -1,1 +1,7 @@
 .stack-work
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.pdf
+*.gz

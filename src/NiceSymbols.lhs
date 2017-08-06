@@ -27,7 +27,7 @@ where
 import Data.Char
 import Numeric
 
-versionNS = "0.3.2"
+versionNS = "0.4.0"
 \end{code}
 
 
@@ -247,7 +247,6 @@ cmathcal 'E' = '\x2130'
 cmathcal c
  | isUpper c  =  chr (ord c - ord 'A' + 0x1d4d0)
  | otherwise  =  c
- #endif
 
 _mathbb = map cmathbb
 
@@ -263,6 +262,8 @@ cmathbb c
  | isLower c  =  chr (ord c - ord 'a' + 0x1d552)
  | isDigit c  =  chr (ord c - ord '0' + 0x1d7d8)
  | otherwise  =  c
+
+#endif
 \end{code}
 
 
@@ -334,9 +335,11 @@ _overline str = "ovl("++str++")"
 _supStr = ('^':)
 _supNum n = _supStr $ show n
 
+cmathcal c = c
 _mathcal str = str
 
-_mathbb  str = str
+cmathbb c = c
+_mathbb str = str
 #endif
 \end{code}
 
