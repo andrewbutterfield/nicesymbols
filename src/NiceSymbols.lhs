@@ -8,7 +8,7 @@ module
   , bold, overline
   , _ll, _gg
   , _alpha, _beta, _theta, _iota, _mu, _pi
-  , _epsilon, _tau, _Sigma, _omega
+  , _epsilon, _tau, _Sigma, _omega, _lambda, _Lambda
   , _top, _bot, _sqcap, _sqcup, _sqsubseteq, _lhd, _rhd
   , _true , _false , _lnot, _land, _lor, _implies, _equiv
   , _forall, _exists
@@ -27,7 +27,7 @@ where
 import Data.Char
 import Numeric
 
-versionNS = "0.4.0"
+versionNS = "0.4.1"
 \end{code}
 
 
@@ -66,6 +66,7 @@ How to convert ASCII `a' to `z' into different fontstyles, in UTF-8
   Math Sans Bold & 120276       & 120302
   \\\hline
 \end{tabular}
+~\\
 \begin{code}
 styleShift code_A code_a c
  | isUpper c  =  chr (ord c + upperShift)
@@ -130,6 +131,8 @@ _epsilon = "\x03f5"
 _tau = "\x03c4"
 _Sigma = "\x2211" -- "\x03a3" ?
 _omega = "\x03c9"
+_lambda = "\x03bb"
+_Lambda = "\x039b"
 
 _top = "\x22a4"
 _bot = "\x22a5"
@@ -286,6 +289,8 @@ _epsilon = "eps"
 _tau = "tau"
 _Sigma = "Sigma"
 _omega = "omega"
+_lambda = "lambda"
+_Lambda = "Lambda"
 
 _top = "T"
 _bot = "_|_"
@@ -357,6 +362,8 @@ niceSyms
    , ("_tau", _tau)
    , ("_Sigma", _Sigma)
    , ("_omega", _omega)
+   , ("_lambda", _lambda)
+   , ("_Lambda", _Lambda)
    , ("_top", _top)
    , ("_bot", _bot)
    , ("_sqcap", _sqcap)
@@ -368,6 +375,8 @@ niceSyms
    , ("_lor", _lor)
    , ("_implies", _implies)
    , ("_equiv", _equiv)
+   , ("_exists", _exists)
+   , ("_forall", _forall)
    , ("_emptyset", _emptyset)
    , ("_cup", _cup)
    , ("_cap", _cap)
