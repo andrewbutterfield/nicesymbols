@@ -18,6 +18,7 @@ module
   , _parallel, _Cap
   , _infty, _star
   , _bullet, _fun, _pfun, _ffun, _maplet, _times
+  , _triangleq
   , _overline
   , _supStr, _supNum
   , _mathcal, cmathcal, _mathbb, cmathbb
@@ -27,7 +28,7 @@ where
 import Data.Char
 import Numeric
 
-versionNS = "0.4.1"
+versionNS = "0.4.2"
 \end{code}
 
 
@@ -176,6 +177,8 @@ _pfun = "\x21f8"
 _ffun = "\x21fb"
 _maplet = "\x21a6"
 _times = "\x2a09"
+
+_triangleq = "\x225c"
 \end{code}
 
 \newpage
@@ -334,6 +337,8 @@ _pfun = "-+>"
 _ffun = "-++>"
 _maplet = "|->"
 _times = "x"
+
+_triangleq = "^="
 
 _overline str = "ovl("++str++")"
 
