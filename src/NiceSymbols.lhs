@@ -20,15 +20,17 @@ module
   , _bullet, _fun, _pfun, _ffun, _maplet, _times
   , _triangleq
   , _overline
-  , _supStr, _supNum
+  , _supStr, _supNum, _subStr, _subNum
   , _mathcal, cmathcal, _mathbb, cmathbb
+  , dia_line, dia_3dots, dia_lhook, dia_rhook
+  , dia_larrow, dia_rarrow, dia_lrarrow
   , help
   )
 where
 import Data.Char
 import Numeric
 
-versionNS = "0.4.2"
+versionNS = "0.4.3"
 \end{code}
 
 
@@ -90,7 +92,9 @@ test = putStrLn . map (styleShift 119886 119886)
 
 \begin{code}
 #ifndef mingw32_HOST_OS
+\end{code}
 
+\begin{code}
 eSGR n = "\ESC["++show n++"m"
 
 resetSGR = eSGR 0
@@ -99,6 +103,9 @@ ovlSGR   = eSGR 9
 
 bold str = boldSGR ++ str ++ resetSGR
 overline str = ovlSGR ++ str ++ resetSGR
+\end{code}
+
+\begin{code}
 #endif
 \end{code}
 
@@ -106,9 +113,14 @@ overline str = ovlSGR ++ str ++ resetSGR
 
 \begin{code}
 #ifdef mingw32_HOST_OS
+\end{code}
 
+\begin{code}
 bold str = '*':str++"*"
 overline str = '^':str++"^"
+\end{code}
+
+\begin{code}
 #endif
 \end{code}
 
@@ -118,7 +130,9 @@ overline str = '^':str++"^"
 
 \begin{code}
 #ifndef mingw32_HOST_OS
+\end{code}
 
+\begin{code}
 _ll = "\x00ab"
 _gg = "\x00bb"
 
@@ -240,6 +254,28 @@ _supChar c
 _supStr s = map _supChar s
 _supNum n = _supStr $ show n
 
+_subChar 'a' = '\x2090'
+_subChar 'e' = '\x2091'
+_subChar 'o' = '\x2092'
+_subChar 'x' = '\x2093'
+_subChar 'h' = '\x2095'
+_subChar 'k' = '\x2096'
+_subChar 'l' = '\x2097'
+_subChar 'm' = '\x2098'
+_subChar 'n' = '\x2099'
+_subChar 'p' = '\x209a'
+_subChar 's' = '\x209b'
+_subChar 't' = '\x209c'
+
+_subChar c
+  | isDigit c = chr (ord c - ord '0' + 0x2080)
+  | isSpace c = c
+  | otherwise = '_'
+
+_subStr s = map _subChar s
+_subNum n = _subStr $ show n
+
+
 _mathcal = map cmathcal
 
 -- cmathcal 'B' = '\x212c' -- not great!
@@ -268,17 +304,20 @@ cmathbb c
  | isLower c  =  chr (ord c - ord 'a' + 0x1d552)
  | isDigit c  =  chr (ord c - ord '0' + 0x1d7d8)
  | otherwise  =  c
-
-#endif
 \end{code}
 
+\begin{code}
+#endif
+\end{code}
 
 \newpage
 \section{``Nice'' Symbols for Windows }
 
 \begin{code}
 #ifdef mingw32_HOST_OS
+\end{code}
 
+\begin{code}
 _ll = "<<"
 _gg = ">>"
 
@@ -345,14 +384,64 @@ _overline str = "ovl("++str++")"
 _supStr = ('^':)
 _supNum n = _supStr $ show n
 
+_subStr = ('_':)
+_subNum n = _subStr $ show n
+
 cmathcal c = c
 _mathcal str = str
 
 cmathbb c = c
 _mathbb str = str
+\end{code}
+
+
+\begin{code}
 #endif
 \end{code}
 
+
+\section{Diacritics}
+
+\subsection{Diacritics for Unix/OS X}
+
+\begin{code}
+#ifndef mingw32_HOST_OS
+\end{code}
+
+\begin{code}
+dia_line c =  c:"\773"
+dia_3dots c = c:"\x20db"
+dia_lhook c = c:"\x20d0"
+dia_rhook c = c:"\x20d1"
+dia_larrow c = c:"\x20d6"
+dia_rarrow c = c:"\x20d7"
+dia_lrarrow c = c:"\x20e1"
+\end{code}
+
+\begin{code}
+#endif
+\end{code}
+
+\subsection{Diacritics for Windows}
+
+\begin{code}
+#ifdef mingw32_HOST_OS
+\end{code}
+
+We don't even try right now \dots
+\begin{code}
+dia_line c = [c]
+dia_3dots c = [c]
+dia_lhook c = [c]
+dia_rhook c = [c]
+dia_larrow c = [c]
+dia_rarrow c = [c]
+dia_lrarrow c = [c]
+\end{code}
+
+\begin{code}
+#endif
+\end{code}
 
 \section{Mainline}
 
@@ -403,6 +492,17 @@ niceSyms
    , ("_times", _times)
    ]
 
+niceDias
+ = [ ("C", "C ")
+   , ("dia_line(C)", dia_line 'C')
+   , ("dia_3dots(C)", dia_3dots 'C')
+   , ("dia_lhook(C)", dia_lhook 'C')
+   , ("dia_rhook(C)", dia_rhook 'C')
+   , ("dia_rarrow(C)", dia_rarrow 'C')
+   , ("dia_larrow(C)", dia_larrow 'C')
+   , ("dia_lrarrow(C)", dia_lrarrow 'C')
+   ]
+
 aLower = ['a'..'z']
 aUpper = ['A'..'Z']
 niceFuns
@@ -411,9 +511,12 @@ niceFuns
    , ("_overline(string)", _overline "string")
    , ("_mathcal('A'..'Z')", _mathcal aUpper )
    , ("_mathbb('A'..'9')", _mathbb (aUpper++"abyz0189") )
-   , ( "_supStr(\"abcdijklmnABCDIJKLMN\")"
-      , _supStr( "abcdijklmnABCDIJKLMN"))
-   , ("_supNum(9876543210)", _supNum 9876543210)
+   , ( "A _supStr(\"a..z\")", 'A':_supStr( ['a'..'z']))
+   , ( "A _supStr(\"A..Z\")", 'A':_supStr( ['A'..'Z']))
+   , ("x _supNum(9876543210)", 'x':_supNum 9876543210)
+   , ( "A _subStr(\"a..z\")", 'A':_subStr( ['a'..'z']))
+   , ( "A _subStr(\"A..Z\")", 'A':_subStr( ['A'..'Z']))
+   , ("x _subNum(9876543210)", 'x':_subNum 9876543210)
    ]
 
 niceRender w (_nm, nm@[uc])
@@ -439,9 +542,12 @@ Use \verb"help" in GHCi to see the available strings and functions.
 help
  = do putStrLn ("Nice Symbols v"++versionNS++" listing:")
       putStrLn $ unlines $ map (niceRender maxw1) niceSyms
+      putStrLn ("Nice Diacritics v"++versionNS++" listing:")
+      putStrLn $ unlines $ map (niceRender maxw2) niceDias
       putStrLn ("Nice Functions v"++versionNS++" listing:")
-      putStrLn $ unlines $ map (niceRender maxw2) niceFuns
+      putStrLn $ unlines $ map (niceRender maxw3) niceFuns
  where
    maxw1 = maximum $ map (length . fst) niceSyms
-   maxw2 = maximum $ map (length . fst) niceFuns
+   maxw2 = maximum $ map (length . fst) niceDias
+   maxw3 = maximum $ map (length . fst) niceFuns
 \end{code}
