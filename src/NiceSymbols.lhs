@@ -362,7 +362,7 @@ _subseteq = "subset"
 _varnothing = "()"
 
 _langle = "<"
-_rangle = ">
+_rangle = ">"
 
 _parallel = "||"
 _Cap = "II"
