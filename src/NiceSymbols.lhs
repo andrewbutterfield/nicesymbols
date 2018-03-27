@@ -6,6 +6,7 @@ module
  NiceSymbols
   ( mathBold, mathSansBold, flags
   , bold, overline
+  , lsq, rsq, ldq, rdq
   , _ll, _gg
   , _alpha, _beta, _theta, _iota, _mu, _pi
   , _epsilon, _tau, _Sigma, _omega, _lambda, _Lambda
@@ -133,6 +134,11 @@ overline str = '^':str++"^"
 \end{code}
 
 \begin{code}
+lsq = "\x2018"
+rsq = "\x2019"
+ldq = "\x201c"
+rdq = "\x201d"
+
 _ll = "\x00ab"
 _gg = "\x00bb"
 
@@ -318,6 +324,11 @@ cmathbb c
 \end{code}
 
 \begin{code}
+lsq = "`"
+rsq = "'"
+ldq = "``"
+rdq = "''"
+
 _ll = "<<"
 _gg = ">>"
 
@@ -449,7 +460,11 @@ dia_lrarrow c = [c]
 Basically a catalog of our nice symbols that is easy to display in GHCi
 \begin{code}
 niceSyms
- = [ ("_ll", _ll)
+ = [ ("lsq",lsq)
+   , ("rsq",rsq)
+   , ("ldq",ldq)
+   , ("rdq",rdq)
+   , ("_ll", _ll)
    , ("_gg", _gg)
    , ("_pi", _pi)
    , ("_epsilon", _epsilon)
