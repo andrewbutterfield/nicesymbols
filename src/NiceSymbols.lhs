@@ -5,7 +5,8 @@
 module
  NiceSymbols
   ( mathBold, mathSansBold, flags
-  , bold, overline
+  , bold, underline
+  , black, red, green, yellow, blue, magenta, cyan, white
   , lsq, rsq, ldq, rdq
   , _ll, _gg
   , _alpha, _beta, _theta, _iota, _mu, _pi
@@ -31,7 +32,7 @@ where
 import Data.Char
 import Numeric
 
-versionNS = "0.4.3"
+versionNS = "0.4.4"
 \end{code}
 
 
@@ -98,12 +99,20 @@ test = putStrLn . map (styleShift 119886 119886)
 \begin{code}
 eSGR n = "\ESC["++show n++"m"
 
-resetSGR = eSGR 0
-boldSGR  = eSGR 1
-ovlSGR   = eSGR 9
+resetSGR  = eSGR 0
+boldSGR   = eSGR 1
+undlSGR   = eSGR 4
+ovlSGR    = eSGR 9
+fontSGR i = eSGR (i+10)
 
-bold str = boldSGR ++ str ++ resetSGR
-overline str = ovlSGR ++ str ++ resetSGR
+colorSGR  i = eSGR (i+30)
+bcolorSGR i = eSGR (i+40)
+
+bold str      = boldSGR    ++ str ++ resetSGR
+overline str  = ovlSGR     ++ str ++ resetSGR
+underline str = undlSGR    ++ str ++ resetSGR
+color i str   = colorSGR i ++ str ++ resetSGR
+[black,red,green,yellow,blue,magenta,cyan,white] = map color [0..7]
 \end{code}
 
 \begin{code}
@@ -118,7 +127,9 @@ overline str = ovlSGR ++ str ++ resetSGR
 
 \begin{code}
 bold str = '*':str++"*"
+underline str = '_':str++"_"
 overline str = '^':str++"^"
+(black,red,green,yellow,blue,magenta,cyan,white) = (id,id,id,id,id,id,id,id)
 \end{code}
 
 \begin{code}
@@ -522,10 +533,23 @@ aLower = ['a'..'z']
 aUpper = ['A'..'Z']
 niceFuns
  = [ ("bold(string)", bold "string" )
-   , ("overline(string)", overline "string" )
-   , ("_overline(string)", _overline "string")
+   , ("underline(string)", underline "string" )
+   -- , ("overline(string)", overline "string" )
+   -- , ("_overline(string)", _overline "string")
+   , ("black(string)", black "string" )
+   , ("red(string)", red "string" )
+   , ("green(string)", green "string" )
+   , ("yellow(string)", yellow "string" )
+   , ("blue(string)", blue "string" )
+   , ("magenta(string)", magenta "string" )
+   , ("cyan(string)", cyan "string" )
+   , ("white(string)", white "string" )
+   , ("red(bold(underline(string)))", red $ bold $ underline "string" )
    , ("_mathcal('A'..'Z')", _mathcal aUpper )
    , ("_mathbb('A'..'9')", _mathbb (aUpper++"abyz0189") )
+   , ("red(_mathbb('A'..'9'))", red $ _mathbb (aUpper++"abyz0189") )
+   , ("bold(_mathbb('A'..'9'))", bold $ _mathbb (aUpper++"abyz0189") )
+   , ("underline(_mathbb('A'..'9'))", underline $ _mathbb (aUpper++"abyz0189") )
    , ( "A _supStr(\"a..z\")", 'A':_supStr( ['a'..'z']))
    , ( "A _supStr(\"A..Z\")", 'A':_supStr( ['A'..'Z']))
    , ("x _supNum(9876543210)", 'x':_supNum 9876543210)
