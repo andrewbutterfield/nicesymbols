@@ -11,16 +11,17 @@ module
   , _ll, _gg
   , _alpha, _beta, _theta, _iota, _mu, _pi
   , _epsilon, _tau, _Sigma, _omega, _lambda, _Lambda
-  , _top, _bot, _sqcap, _sqcup, _sqsubseteq, _lhd, _rhd
+  , _top, _bot, _sqcap, _sqcup, _sqsubseteq, _sqsupseteq
+  , _lhd, _rhd
   , _true , _false , _lnot, _land, _lor, _implies, _equiv
   , _forall, _exists
   , _emptyset, _cup, _cap, _setminus
-  , _in, _subseteq, _varnothing
+  , _in, _subseteq, _supseteq, _varnothing
   , _langle, _rangle
   , _parallel, _Cap
   , _infty, _star
   , _bullet, _fun, _pfun, _ffun, _maplet, _times
-  , _triangleq
+  , _triangleq, _vdash
   , _overline
   , _supStr, _supNum, _subStr, _subNum
   , _mathcal, cmathcal, _mathbb, cmathbb
@@ -144,6 +145,7 @@ overline str = '^':str++"^"
 #ifndef mingw32_HOST_OS
 \end{code}
 
+$\sqsubseteq \sqsupseteq$
 \begin{code}
 lsq = "\x2018"
 rsq = "\x2019"
@@ -171,6 +173,7 @@ _bot = "\x22a5"
 _sqcap = "\x2293"
 _sqcup = "\x2294"
 _sqsubseteq = "\x2291"
+_sqsupseteq = "\x2292"
 _lhd = "\x25c1"
 _rhd = "\x25b7"
 
@@ -191,6 +194,7 @@ _cap = "\x2229"
 _setminus = "\x2216"
 _in = "\x2208"
 _subseteq = "\x2286"
+_supseteq = "\x2287"
 _varnothing = "\x2205"
 
 _langle = "\x27e8"
@@ -210,6 +214,8 @@ _maplet = "\x27fc "
 _times = "\x2a09"
 
 _triangleq = "\x225c"
+
+_vdash = "\x22a2"
 \end{code}
 
 \newpage
@@ -361,6 +367,7 @@ _bot = "_|_"
 _sqcap = "|~|"
 _sqcup = "|_|"
 _sqsubseteq = "|="
+_sqsupseteq = "=|"
 _lhd = "<|"
 _rhd = "|>"
 
@@ -381,6 +388,7 @@ _cap = "I"
 _setminus = "\\"
 _in = "in"
 _subseteq = "subset"
+_supseteq = "supset"
 _varnothing = "()"
 
 _langle = "<"
@@ -400,6 +408,8 @@ _maplet = "|->"
 _times = "x"
 
 _triangleq = "^="
+
+_vdash = "|-"
 
 _overline str = "ovl("++str++")"
 
@@ -488,6 +498,8 @@ niceSyms
    , ("_bot", _bot)
    , ("_sqcap", _sqcap)
    , ("_sqcup", _sqcup)
+   , ("_sqsubseteq", _sqsubseteq)
+   , ("_sqsupseteq", _sqsupseteq)
    , ("_true", _true)
    , ("_false", _false)
    , ("_lnot", _lnot)
@@ -503,6 +515,7 @@ niceSyms
    , ("_setminus", _setminus)
    , ("_in", _in)
    , ("_subseteq", _subseteq)
+   , ("_supseteq", _supseteq)
    , ("_varnothing", _varnothing)
    , ("_langle", _langle)
    , ("_rangle", _rangle)
@@ -516,6 +529,8 @@ niceSyms
    , ("_ffun", _ffun)
    , ("_maplet", _maplet)
    , ("_times", _times)
+   , ("_triangleq", _triangleq)
+   , ("_vdash", _vdash)
    ]
 
 niceDias
