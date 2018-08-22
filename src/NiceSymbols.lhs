@@ -22,6 +22,7 @@ module
   , _infty, _star
   , _bullet, _fun, _pfun, _ffun, _maplet, _times
   , _triangleq, _vdash
+  , _qed, _redQ
   , _overline
   , _supStr, _supNum, _subStr, _subNum
   , _mathcal, cmathcal, _mathbb, cmathbb
@@ -33,7 +34,7 @@ where
 import Data.Char
 import Numeric
 
-versionNS = "0.4.4"
+versionNS = "0.4.6"
 \end{code}
 
 
@@ -216,6 +217,9 @@ _times = "\x2a09"
 _triangleq = "\x225c"
 
 _vdash = "\x22a2"
+
+_qed  = "\x220e"
+_redQ = "\x2753"
 \end{code}
 
 \newpage
@@ -411,6 +415,9 @@ _triangleq = "^="
 
 _vdash = "|-"
 
+_qed = "[*]"
+_redQ = "??"
+
 _overline str = "ovl("++str++")"
 
 _supStr = ('^':)
@@ -531,6 +538,8 @@ niceSyms
    , ("_times", _times)
    , ("_triangleq", _triangleq)
    , ("_vdash", _vdash)
+   , ("_qed", _qed)
+   , ("_redQ", _redQ)
    ]
 
 niceDias
