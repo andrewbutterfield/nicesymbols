@@ -28,13 +28,16 @@ module
   , _mathcal, cmathcal, _mathbb, cmathbb
   , dia_line, dia_3dots, dia_lhook, dia_rhook
   , dia_larrow, dia_rarrow, dia_lrarrow
+  , niceSymMap, findSym
   , help
   )
 where
 import Data.Char
 import Numeric
+import Data.Map (Map)
+import qualified Data.Map as M
 
-versionNS = "0.4.6"
+versionNS = "0.5.0"
 \end{code}
 
 
@@ -541,6 +544,12 @@ niceSyms
    , ("_qed", _qed)
    , ("_redQ", _redQ)
    ]
+
+niceSymMap :: Map String String
+niceSymMap = M.fromList niceSyms
+
+findSym :: String -> Maybe String
+findSym str = M.lookup str niceSymMap
 
 niceDias
  = [ ("C", "C ")
