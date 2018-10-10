@@ -17,6 +17,7 @@ module
   , _forall, _exists
   , _emptyset, _cup, _cap, _setminus
   , _in, _subseteq, _supseteq, _varnothing
+  , _neq, _notin, _nexists, _nsubseteq
   , _langle, _rangle
   , _parallel, _Cap
   , _infty, _star
@@ -200,6 +201,11 @@ _in = "\x2208"
 _subseteq = "\x2286"
 _supseteq = "\x2287"
 _varnothing = "\x2205"
+
+_neq = "\x2260"
+_notin = "\x2209"
+_nexists = "\x2204"
+_nsubseteq = "\x2288"
 
 _langle = "\x27e8"
 _rangle = "\x27e9"
@@ -398,6 +404,11 @@ _subseteq = "subset"
 _supseteq = "supset"
 _varnothing = "()"
 
+_neq = "neq"
+_notin = "notin"
+_nexists = "nexists"
+_nsubseteq = "nsubseteq"
+
 _langle = "<"
 _rangle = ">"
 
@@ -527,6 +538,10 @@ niceSyms
    , ("_subseteq", _subseteq)
    , ("_supseteq", _supseteq)
    , ("_varnothing", _varnothing)
+   , ("_neq", _neq)
+   , ("_notin", _notin)
+   , ("_nexists", _nexists)
+   , ("_nsubseteq", _nsubseteq)
    , ("_langle", _langle)
    , ("_rangle", _rangle)
    , ("_parallel", _parallel)
