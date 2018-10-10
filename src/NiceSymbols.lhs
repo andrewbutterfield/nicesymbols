@@ -38,7 +38,7 @@ import Numeric
 import Data.Map (Map)
 import qualified Data.Map as M
 
-versionNS = "0.5.0"
+versionNS = "0.5.1"
 \end{code}
 
 
