@@ -502,21 +502,34 @@ dia_lrarrow c = [c]
 
 
 \begin{code}
-widthHack :: String -> String
+widthHack :: Int -> String -> String
+
+tst str = putStrLn $ unlines [ str, widthHack 1 str, widthHack 2 str ]
+tstop op = tst ("A"++op++"B ; A "++op++" B .")
+
+widthHelp = sequence_ (fmap (tstop . snd) niceSyms)
 \end{code}
 
 \begin{code}
 #ifndef mingw32_HOST_OS
 
-widthHack = id
+widthHack s cs = whack (replicate s ' ') cs
 
+whack _ [] = []
+whack ss (c:cs)
+ | c `elem` badWidths  =  c:ss++cs'
+ | otherwise           =  c:cs'
+ where
+   cs' = whack ss cs
+
+badWidths = _implies ++ _star ++ _fun ++ _maplet
 #endif
 \end{code}
 
 \begin{code}
 #ifdef mingw32_HOST_OS
 
-widthHack = id
+widthHack _ = id
 #endif
 \end{code}
 
