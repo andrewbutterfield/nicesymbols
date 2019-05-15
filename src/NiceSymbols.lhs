@@ -31,6 +31,7 @@ module
   , dia_larrow, dia_rarrow, dia_lrarrow
   , niceSymMap, findSym
   , help
+  , widthHack
   )
 where
 import Data.Char
@@ -495,6 +496,31 @@ dia_lrarrow c = [c]
 \begin{code}
 #endif
 \end{code}
+
+
+\section{Width Hack}
+
+
+\begin{code}
+widthHack :: String -> String
+\end{code}
+
+\begin{code}
+#ifndef mingw32_HOST_OS
+
+widthHack = id
+
+#endif
+\end{code}
+
+\begin{code}
+#ifdef mingw32_HOST_OS
+
+widthHack = id
+#endif
+\end{code}
+
+
 
 \section{Mainline}
 
