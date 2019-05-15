@@ -38,8 +38,10 @@ import Data.Char
 import Numeric
 import Data.Map (Map)
 import qualified Data.Map as M
+--import qualified Data.Text as T     -- Don't help,
+--import qualified Data.Text.IO as T  --  still require widthHack !
 
-versionNS = "0.5.1"
+versionNS = "0.5.2"
 \end{code}
 
 
@@ -145,13 +147,13 @@ overline str = '^':str++"^"
 
 
 \newpage
-\section{Nice Symbols for OS X/Unix}
+\section{Nice Symbols}
+\subsection{Nice Symbols for OS X/Unix}
 
 \begin{code}
 #ifndef mingw32_HOST_OS
 \end{code}
 
-$\sqsubseteq \sqsupseteq$
 \begin{code}
 lsq = "\x2018"
 rsq = "\x2019"
@@ -348,7 +350,7 @@ cmathbb c
 \end{code}
 
 \newpage
-\section{``Nice'' Symbols for Windows }
+\subsection{``Nice'' Symbols for Windows }
 
 \begin{code}
 #ifdef mingw32_HOST_OS
@@ -454,6 +456,7 @@ _mathbb str = str
 \end{code}
 
 
+\newpage
 \section{Diacritics}
 
 \subsection{Diacritics for Unix/OS X}
@@ -497,15 +500,16 @@ dia_lrarrow c = [c]
 #endif
 \end{code}
 
-
+\newpage
 \section{Width Hack}
 
+\subsection{Width Hack for OS X/Unix}
 
 \begin{code}
 widthHack :: Int -> String -> String
 
 tst str = putStrLn $ unlines [ str, widthHack 1 str, widthHack 2 str ]
-tstop op = tst ("A"++op++"B ; A "++op++" B .")
+tstop op = tst (" A"++op++"B ; A "++op++" B .")
 
 widthHelp = sequence_ (fmap (tstop . snd) niceSyms)
 \end{code}
@@ -526,6 +530,8 @@ badWidths = _implies ++ _star ++ _fun ++ _maplet
 #endif
 \end{code}
 
+\subsection{Width Hack for Windows}
+
 \begin{code}
 #ifdef mingw32_HOST_OS
 
@@ -534,7 +540,7 @@ widthHack _ = id
 \end{code}
 
 
-
+\newpage
 \section{Mainline}
 
 
