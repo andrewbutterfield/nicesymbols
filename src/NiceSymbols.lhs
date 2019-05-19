@@ -357,10 +357,10 @@ cmathbb c
 \end{code}
 
 \begin{code}
-lsq = "`"
+lsq = "'"
 rsq = "'"
-ldq = "``"
-rdq = "''"
+ldq = "\""
+rdq = "\""
 
 _ll = "<<"
 _gg = ">>"
