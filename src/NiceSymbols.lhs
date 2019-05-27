@@ -46,6 +46,8 @@ versionNS = "0.6"
 \end{code}
 
 
+\subsection{Mapping names to Symbol alternatives}
+
 
 We define some nice symbols using unicode,
 along with dull ASCII equivalents for less capable consoles.
@@ -114,6 +116,9 @@ render = aa_render
 render = u8_render
 #endif
 \end{code}
+
+\subsection{The Symbol List}
+
 \begin{code}
 theSymbolList :: [(String,SymbolFormat)]
 theSymbolList
@@ -125,6 +130,9 @@ theSymbolList
 
 \newpage
 \section{Platform Independent Code}
+
+All of the following needs re-organising,
+as a lot more of the code is now platform independent.
 
 \subsection{Follow each character by \dots}
 

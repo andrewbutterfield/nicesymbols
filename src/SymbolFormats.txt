@@ -1,0 +1,77 @@
+lsq = "'",_lsq = "\x2018"
+rsq = "'",_rsq = "\x2019"
+ldq = "\"",_ldq = "\x201c"
+rdq = "\"",_rdq = "\x201d"
+
+_ll = "<<",_ll = "\x00ab"
+_gg = ">>",_gg = "\x00bb"
+
+_alpha = "alf",_alpha = "\x03b1"
+_beta = "beta",_beta = "\x03b2"
+_theta = "theta",_theta = "\x03b8"
+_iota = "iota",_iota = "\x03b9"
+_mu = "mu",_mu = "\x03bc"
+_pi = "pi",_pi = "\x03c0"
+_epsilon = "eps",_epsilon = "\x03f5"
+_tau = "tau",_tau = "\x03c4"
+_Sigma = "Sigma",_Sigma = "\x2211"
+_omega = "omega",_omega = "\x03c9"
+_lambda = "lambda",_lambda = "\x03bb"
+_Lambda = "Lambda",_Lambda = "\x039b"
+
+_top = "T",_top = "\x22a4"
+_bot = "_|_",_bot = "\x22a5"
+_sqcap = "|~|",_sqcap = "\x2293"
+_sqcup = "|_|",_sqcup = "\x2294"
+_sqsubseteq = "|=",_sqsubseteq = "\x2291"
+_sqsupseteq = "=|",_sqsupseteq = "\x2292"
+_lhd = "<|",_lhd = "\x25c1"
+_rhd = "|>",_rhd = "\x25b7"
+
+_true = "true",_true = bold "true"
+_false = "false" ,_false = bold "false"
+_lnot = "~",_lnot = "\x00ac"
+_land = "/\\",_land = "\x2227"
+_lor = "\\/",_lor = "\x2228"
+_implies = "==>",_implies = "\x27f9"
+_equiv = "==",_equiv = "\x2261"
+
+_forall = "forall",_forall = "\x2200"
+_exists = "exists",_exists = "\x2203"
+
+_emptyset = "{}",_emptyset = "\x00d8"
+_cup = "U",_cup = "\x222a"
+_cap = "I",_cap = "\x2229"
+_setminus = "\\",_setminus = "\x2216"
+_in = "in",_in = "\x2208"
+_subseteq = "subset",_subseteq = "\x2286"
+_supseteq = "supset",_supseteq = "\x2287"
+_varnothing = "()",_varnothing = "\x2205"
+
+_neq = "neq",_neq = "\x2260"
+_notin = "notin",_notin = "\x2209"
+_nexists = "nexists",_nexists = "\x2204"
+_nsubseteq = "nsubseteq",_nsubseteq = "\x2288"
+
+_langle = "<",_langle = "\x27e8"
+_rangle = ">",_rangle = "\x27e9"
+
+_parallel = "||",_parallel = "\x2016"
+_Cap = "II",_Cap = "\x22d2"
+
+_infty = "inf",_infty = "\x221e"
+_star = "*",_star = "\x2605"
+
+_bullet = "@",_bullet = "\x2022"
+_fun = "->",_fun = "\x27f6"
+_pfun = "-+>",_pfun = "\x21f8"
+_ffun = "-++>",_ffun = "\x21fb"
+_maplet = "|->",_maplet = "\x27fc"
+_times = "x",_times = "\x2a09"
+
+_triangleq = "^=",_triangleq = "\x225c"
+
+_vdash = "|-",_vdash = "\x22a2"
+
+_qed = "[*]",_qed  = "\x220e"
+_redQ = "??",_redQ = "\x2753"
