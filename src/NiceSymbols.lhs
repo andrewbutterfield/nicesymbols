@@ -4,7 +4,8 @@
 {-# LANGUAGE CPP #-}
 module
  NiceSymbols
-  ( mathBold, mathSansBold, flags
+  ( aa_render, u8_render, render
+  , mathBold, mathSansBold, flags
   , bold, underline
   , black, red, green, yellow, blue, magenta, cyan, white
   , lsq, rsq, ldq, rdq
@@ -41,19 +42,86 @@ import qualified Data.Map as M
 --import qualified Data.Text as T     -- Don't help,
 --import qualified Data.Text.IO as T  --  still require widthHack !
 
-versionNS = "0.5.2"
+versionNS = "0.6"
 \end{code}
 
 
-We define some nice symbols using unicode, for non-Windows usage,
-along with dull ASCII equivalents for Windows users.
 
-We assume UTF-8 throughout.
+We define some nice symbols using unicode,
+along with dull ASCII equivalents for less capable consoles.
 
-Given a LaTeX symbol macro like \verb"\xyz"
-we define a Haskell variable \verb"_xyz"
-to be a string that gives either a Unicode/UTF-8 glyph for that symbol,
-or an approximation using ``ASCII-art''.
+What we do is define a map from an ASCII ``key-string''
+to a tuple of different ways of rendering it.
+For now we support ``ASCII Art'' (\texttt{aa\_})
+and UTF-8 Unicode (\texttt{u8\_}).
+
+\begin{code}
+data SymbolFormat
+  = SymForm { aa :: String -- ASCII Art
+            , u8 :: String -- Unicode, UTF-8
+            -- extendable if good alternatives come along
+            }
+
+type SymbolMap = Map String SymbolFormat
+\end{code}
+
+This mapping is exported along with lookup functions
+that can return any of the possible renderings.
+If the lookup fails, then a tuple made
+entirely of ``key-string'' is returned.
+\begin{code}
+symbLookup :: SymbolMap -> String -> SymbolFormat
+symbLookup symMap key
+  = case M.lookup key symMap of
+      Nothing  ->  SymForm key key
+      Just sf  ->  sf
+
+theSymbolMap :: SymbolMap
+theSymbolMap = M.fromList theSymbolList
+\end{code}
+
+A symbol is given a name in Haskell based on the (most) common \LaTeX\ macro
+for that symbol,
+so $\implies$ (\TeX\ macro \texttt{$\backslash$implies}),
+key string ``implies'',
+is exported from this module as Haskell identifier \texttt{\_implies}.
+\begin{verbatim}
+theSymbolList =
+  [ ..., ("implies",SymForm "==>", "\x27f9"), ...]
+\end{verbatim}
+We can invoke specific renderers if we wish:
+\begin{code}
+aa_render, u8_render :: String -> String
+aa_render = aa . symbLookup theSymbolMap
+u8_render = u8 . symbLookup theSymbolMap
+\end{code}
+\begin{code}
+render :: String -> String
+\end{code}
+So we shall define
+\begin{verbatim}
+_implies = render "implies"
+\end{verbatim}
+The particular rendering used by these variables
+is as a result of conditional compilation.
+For now we only distinguish between Windows (aka \texttt{mingw32})
+and the rest.
+\begin{code}
+#ifdef mingw32_HOST_OS
+render = aa_render
+#endif
+#ifndef mingw32_HOST_OS
+render = u8_render
+#endif
+\end{code}
+\begin{code}
+theSymbolList :: [(String,SymbolFormat)]
+theSymbolList
+  =  [
+     ]
+\end{code}
+
+
 
 \newpage
 \section{Platform Independent Code}
