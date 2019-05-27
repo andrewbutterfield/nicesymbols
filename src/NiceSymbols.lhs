@@ -99,12 +99,7 @@ test = putStrLn . map (styleShift 119886 119886)
 \newpage
 \section{Weight Conversions}
 
-\subsection{Weight Conversion for Unix/OS X}
-
-\begin{code}
-#ifndef mingw32_HOST_OS
-\end{code}
-
+ANSI escape sequences out here
 \begin{code}
 eSGR n = "\ESC["++show n++"m"
 
@@ -116,7 +111,15 @@ fontSGR i = eSGR (i+10)
 
 colorSGR  i = eSGR (i+30)
 bcolorSGR i = eSGR (i+40)
+\end{code}
 
+\subsection{Weight Conversion for Unix/OS X}
+
+\begin{code}
+#ifndef mingw32_HOST_OS
+\end{code}
+
+\begin{code}
 bold str      = boldSGR    ++ str ++ resetSGR
 overline str  = ovlSGR     ++ str ++ resetSGR
 underline str = undlSGR    ++ str ++ resetSGR
@@ -135,10 +138,11 @@ color i str   = colorSGR i ++ str ++ resetSGR
 \end{code}
 
 \begin{code}
-bold str = '*':str++"*"
+bold str      = '*':str++"*"
 underline str = '_':str++"_"
-overline str = '^':str++"^"
-(black,red,green,yellow,blue,magenta,cyan,white) = (id,id,id,id,id,id,id,id)
+overline str  = '^':str++"^"
+color i str   = colorSGR i ++ str ++ resetSGR
+[black,red,green,yellow,blue,magenta,cyan,white] = map color [0..7]
 \end{code}
 
 \begin{code}
@@ -357,10 +361,10 @@ cmathbb c
 \end{code}
 
 \begin{code}
-lsq = "`"
+lsq = "'"
 rsq = "'"
-ldq = "``"
-rdq = "''"
+ldq = "\""
+rdq = "\""
 
 _ll = "<<"
 _gg = ">>"
