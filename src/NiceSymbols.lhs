@@ -4,14 +4,14 @@
 {-# LANGUAGE CPP #-}
 module
  NiceSymbols
-  ( aa_render, u8_render, render
+  ( aa_nicesym, u8_nicesym, nicesym
   , mathBold, mathSansBold, flags
   , bold, underline
   , black, red, green, yellow, blue, magenta, cyan, white
   , lsq, rsq, ldq, rdq
   , _ll, _gg
   , _alpha, _beta, _theta, _iota, _mu, _pi
-  , _epsilon, _tau, _Sigma, _omega, _lambda, _Lambda
+  , _epsilon, _tau, _sigma, _Sigma, _omega, _lambda, _Lambda
   , _top, _bot, _sqcap, _sqcup, _sqsubseteq, _sqsupseteq
   , _lhd, _rhd
   , _true , _false , _lnot, _land, _lor, _implies, _equiv
@@ -93,16 +93,16 @@ theSymbolList =
 \end{verbatim}
 We can invoke specific renderers if we wish:
 \begin{code}
-aa_render, u8_render :: String -> String
-aa_render = aa . symbLookup theSymbolMap
-u8_render = u8 . symbLookup theSymbolMap
+aa_nicesym, u8_nicesym :: String -> String
+aa_nicesym = aa . symbLookup theSymbolMap
+u8_nicesym = u8 . symbLookup theSymbolMap
 \end{code}
 \begin{code}
-render :: String -> String
+nicesym :: String -> String
 \end{code}
 So we shall define
 \begin{verbatim}
-_implies = render "implies"
+_implies = nicesym "implies"
 \end{verbatim}
 The particular rendering used by these variables
 is as a result of conditional compilation.
@@ -110,20 +110,117 @@ For now we only distinguish between Windows (aka \texttt{mingw32})
 and the rest.
 \begin{code}
 #ifdef mingw32_HOST_OS
-render = aa_render
+nicesym = aa_nicesym
 #endif
 #ifndef mingw32_HOST_OS
-render = u8_render
+nicesym = u8_nicesym
 #endif
 \end{code}
 
+\newpage
 \subsection{The Symbol List}
 
 \begin{code}
 theSymbolList :: [(String,SymbolFormat)]
 theSymbolList
-  =  [
-     ]
+ =[ ("lsq", SymForm "'"  "\x2018"), ("rsq", SymForm "'"  "\x2019")
+  , ("ldq", SymForm "\""  "\x201c"), ("rdq", SymForm "\""  "\x201d")
+
+  , ("ll", SymForm "<<"  "\x00ab"), ("gg", SymForm ">>"  "\x00bb")
+
+  , ("alpha", SymForm "alf"  "\x03b1"), ("beta", SymForm "beta"  "\x03b2")
+  , ("theta", SymForm "theta"  "\x03b8"), ("iota", SymForm "iota"  "\x03b9")
+  , ("mu", SymForm "mu"  "\x03bc"), ("pi", SymForm "pi"  "\x03c0")
+  , ("epsilon", SymForm "eps"  "\x03f5"), ("tau", SymForm "tau"  "\x03c4")
+  , ("sigma", SymForm "sigma"  "\x03c3")
+  , ("Sigma", SymForm "Sigma"  "\x2211")
+  , ("omega", SymForm "omega"  "\x03c9")
+  , ("lambda", SymForm "lambda"  "\x03bb"), ("Lambda", SymForm "Lambda"  "\x039b")
+
+  , ("top", SymForm "T"  "\x22a4"), ("bot", SymForm "_|_"  "\x22a5")
+  , ("sqcap", SymForm "|~|"  "\x2293"), ("sqcup", SymForm "|_|"  "\x2294")
+  , ("sqsubseteq", SymForm "|=" "\x2291"), ("sqsupseteq", SymForm "=|" "\x2292")
+  , ("lhd", SymForm "<|"  "\x25c1"), ("rhd", SymForm "|>"  "\x25b7")
+
+  , ("true", SymForm "true" (bold "true")), ("false", SymForm "false" (bold "false"))
+  , ("lnot", SymForm "~"  "\x00ac")
+  , ("land", SymForm "/\\"  "\x2227"), ("lor", SymForm "\\/"  "\x2228")
+  , ("implies", SymForm "==>"  "\x27f9"), ("equiv", SymForm "=="  "\x2261")
+
+  , ("forall", SymForm "forall" "\x2200"), ("exists", SymForm "exists" "\x2203")
+
+  , ("emptyset", SymForm "{}"  "\x00d8"), ("in", SymForm "in"  "\x2208")
+  , ("cup", SymForm "U"  "\x222a"), ("cap", SymForm "I"  "\x2229")
+  , ("subseteq", SymForm "subset" "\x2286"), ("supseteq", SymForm "supset" "\x2287")
+  , ("setminus", SymForm "\\"  "\x2216"), ("varnothing", SymForm "()" "\x2205")
+
+  , ("neq", SymForm "neq"  "\x2260"), ("notin", SymForm "notin"  "\x2209")
+  , ("nexists", SymForm "nexists" "\x2204"), ("nsubseteq", SymForm "nsubseteq" "\x2288")
+
+  , ("langle", SymForm "<"  "\x27e8"), ("rangle", SymForm ">"  "\x27e9")
+
+  , ("parallel", SymForm "||"  "\x2016"), ("Cap", SymForm "II"  "\x22d2")
+
+  , ("infty", SymForm "inf"  "\x221e"), ("star", SymForm "*"  "\x2605")
+
+  , ("bullet", SymForm "@"  "\x2022"), ("times", SymForm "x"  "\x2a09")
+  , ("fun", SymForm "->"  "\x27f6"), ("pfun", SymForm "-+>"  "\x21f8")
+  , ("ffun", SymForm "-++>"  "\x21fb"), ("maplet", SymForm "|->"  "\x27fc")
+
+  , ("triangleq", SymForm "^="  "\x225c"), ("vdash", SymForm "|-"  "\x22a2")
+
+  , ("qed", SymForm "[*]"  "\x220e"), ("redQ", SymForm "??"  "\x2753")
+  ]
+\end{code}
+
+\newpage
+Exporting the names, for convenience
+\begin{code}
+lsq = nicesym "lsq" ; rsq = nicesym "rsq"
+ldq = nicesym "ldq" ; rdq = nicesym "rdq"
+
+_ll = nicesym "ll" ; _gg = nicesym "gg"
+
+_alpha = nicesym "alpha" ; _beta = nicesym "beta"
+_theta = nicesym "theta" ; _iota = nicesym "iota"
+_mu = nicesym "mu" ; _pi = nicesym "pi"
+_epsilon = nicesym "epsilon" ; _tau = nicesym "tau"
+_sigma = nicesym "sigma" ; _Sigma = nicesym "Sigma"
+_omega = nicesym "omega"
+_lambda = nicesym "lambda" ; _Lambda = nicesym "Lambda"
+
+_top = nicesym "top" ; _bot = nicesym "bot"
+_sqcap = nicesym "sqcap" ; _sqcup = nicesym "sqcup"
+_sqsubseteq = nicesym "sqsubseteq" ; _sqsupseteq = nicesym "sqsupseteq"
+_lhd = nicesym "lhd" ; _rhd = nicesym "rhd"
+
+_true = nicesym "true" ; _false = nicesym "false"
+_lnot = nicesym "lnot" ; _land = nicesym "land" ; _lor = nicesym "lor"
+_implies = nicesym "implies" ; _equiv = nicesym "equiv"
+
+_forall = nicesym "forall" ; _exists = nicesym "exists"
+
+_emptyset = nicesym "emptyset" ; _in = nicesym "in"
+_cup = nicesym "cup" ; _cap = nicesym "cap"
+_subseteq = nicesym "subseteq" ; _supseteq = nicesym "supseteq"
+_setminus = nicesym "setminus" ; _varnothing = nicesym "varnothing"
+
+_neq = nicesym "neq" ; _notin = nicesym "notin"
+_nexists = nicesym "nexists" ;_nsubseteq = nicesym "nsubseteq"
+
+_langle = nicesym "langle" ; _rangle = nicesym "rangle"
+
+_parallel = nicesym "parallel" ; _Cap = nicesym "Cap"
+
+_infty = nicesym "infty" ; _star = nicesym "star"
+
+_bullet = nicesym "bullet" ; _times = nicesym "times"
+_fun = nicesym "fun" ; _pfun = nicesym "pfun"
+_ffun = nicesym "ffun" ; _maplet = nicesym "maplet"
+
+_triangleq = nicesym "triangleq" ; _vdash = nicesym "vdash"
+
+_qed = nicesym "qed" ; _redQ = nicesym "redQ"
 \end{code}
 
 
@@ -231,90 +328,10 @@ color i str   = colorSGR i ++ str ++ resetSGR
 \subsection{Nice Symbols for OS X/Unix}
 
 \begin{code}
+-- We need to to merge most of this as well
 #ifndef mingw32_HOST_OS
 \end{code}
 
-\begin{code}
-lsq = "\x2018"
-rsq = "\x2019"
-ldq = "\x201c"
-rdq = "\x201d"
-
-_ll = "\x00ab"
-_gg = "\x00bb"
-
-_alpha = "\x03b1"
-_beta = "\x03b2"
-_theta = "\x03b8"
-_iota = "\x03b9"
-_mu = "\x03bc"
-_pi = "\x03c0"
-_epsilon = "\x03f5"
-_tau = "\x03c4"
-_Sigma = "\x2211" -- "\x03a3" ?
-_omega = "\x03c9"
-_lambda = "\x03bb"
-_Lambda = "\x039b"
-
-_top = "\x22a4"
-_bot = "\x22a5"
-_sqcap = "\x2293"
-_sqcup = "\x2294"
-_sqsubseteq = "\x2291"
-_sqsupseteq = "\x2292"
-_lhd = "\x25c1"
-_rhd = "\x25b7"
-
-_true = bold "true"
-_false = bold "false"
-_lnot = "\x00ac"
-_land = "\x2227"
-_lor = "\x2228"
-_implies = "\x27f9"
-_equiv = "\x2261"
-
-_forall = "\x2200"
-_exists = "\x2203"
-
-_emptyset = "\x00d8"
-_cup = "\x222a"
-_cap = "\x2229"
-_setminus = "\x2216"
-_in = "\x2208"
-_subseteq = "\x2286"
-_supseteq = "\x2287"
-_varnothing = "\x2205"
-
-_neq = "\x2260"
-_notin = "\x2209"
-_nexists = "\x2204"
-_nsubseteq = "\x2288"
-
-_langle = "\x27e8"
-_rangle = "\x27e9"
-
-_parallel = "\x2016"
-_Cap = "\x22d2"
-
-_infty = "\x221e"
-_star = "\x2605"
-
-_bullet = "\x2022"
-_fun = "\x27f6"
-_pfun = "\x21f8"
-_ffun = "\x21fb"
-_maplet = "\x27fc"
-_times = "\x2a09"
-
-_triangleq = "\x225c"
-
-_vdash = "\x22a2"
-
-_qed  = "\x220e"
-_redQ = "\x2753"
-\end{code}
-
-\newpage
 \begin{code}
 _overline str = "\ESC[9m"++follow str '\x35e'++"\ESC[0m"
 
@@ -437,84 +454,6 @@ cmathbb c
 \end{code}
 
 \begin{code}
-lsq = "'"
-rsq = "'"
-ldq = "\""
-rdq = "\""
-
-_ll = "<<"
-_gg = ">>"
-
-_alpha = "alf"
-_beta = "beta"
-_theta = "theta"
-_iota = "iota"
-_mu = "mu"
-_pi = "pi"
-_epsilon = "eps"
-_tau = "tau"
-_Sigma = "Sigma"
-_omega = "omega"
-_lambda = "lambda"
-_Lambda = "Lambda"
-
-_top = "T"
-_bot = "_|_"
-_sqcap = "|~|"
-_sqcup = "|_|"
-_sqsubseteq = "|="
-_sqsupseteq = "=|"
-_lhd = "<|"
-_rhd = "|>"
-
-_true = "true"  -- bold true
-_false = "false" -- bold false
-_lnot = "~"
-_land = "/\\"
-_lor = "\\/"
-_implies = "==>"
-_equiv = "=="
-
-_forall = "forall"
-_exists = "exists"
-
-_emptyset = "{}"
-_cup = "U"
-_cap = "I"
-_setminus = "\\"
-_in = "in"
-_subseteq = "subset"
-_supseteq = "supset"
-_varnothing = "()"
-
-_neq = "neq"
-_notin = "notin"
-_nexists = "nexists"
-_nsubseteq = "nsubseteq"
-
-_langle = "<"
-_rangle = ">"
-
-_parallel = "||"
-_Cap = "II"
-
-_infty = "inf"
-_star = "*"
-
-_bullet = "@"
-_fun = "->"
-_pfun = "-+>"
-_ffun = "-++>"
-_maplet = "|->"
-_times = "x"
-
-_triangleq = "^="
-
-_vdash = "|-"
-
-_qed = "[*]"
-_redQ = "??"
-
 _overline str = "ovl("++str++")"
 
 _supStr = ('^':)
