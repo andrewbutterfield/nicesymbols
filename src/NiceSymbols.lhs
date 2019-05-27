@@ -526,7 +526,7 @@ whack ss (c:cs)
  where
    cs' = whack ss cs
 
-badWidths = _implies ++ _star ++ _fun ++ _maplet
+badWidths = _implies ++ _star ++ _fun ++ _pfun ++ _ffun ++ _maplet
 #endif
 \end{code}
 
