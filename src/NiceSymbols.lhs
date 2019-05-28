@@ -6,6 +6,7 @@ module
  NiceSymbols
   ( aa_nicesym, u8_nicesym, nicesym
   , mathBold, mathSansBold, flags
+  , stripANSI, nicelength
   , bold, underline
   , black, red, green, yellow, blue, magenta, cyan, white
   , lsq, rsq, ldq, rdq
@@ -284,6 +285,22 @@ fontSGR i = eSGR (i+10)
 
 colorSGR  i = eSGR (i+30)
 bcolorSGR i = eSGR (i+40)
+\end{code}
+
+We may want to remove them, or compute lengths that ignore them.
+\begin{code}
+stripANSI ""      =  ""
+stripANSI ('\ESC':'[':d:cs)
+ | isDigit d      =  skipANSI cs
+stripANSI (c:cs)  =  c : stripANSI cs
+
+skipANSI ""   =  ""
+skipANSI (c:cs)
+ | isDigit c  =  skipANSI cs
+ | c == 'm'   =  stripANSI cs
+ | otherwise  =  '?':stripANSI cs -- should not happen
+
+nicelength = length . stripANSI
 \end{code}
 
 \subsection{Weight Conversion for Unix/OS X}
