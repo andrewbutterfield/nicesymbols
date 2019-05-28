@@ -143,7 +143,6 @@ theSymbolList
   , ("sqsubseteq", SymForm "|=" "\x2291"), ("sqsupseteq", SymForm "=|" "\x2292")
   , ("lhd", SymForm "<|"  "\x25c1"), ("rhd", SymForm "|>"  "\x25b7")
 
-  , ("true", SymForm "true" (bold "true")), ("false", SymForm "false" (bold "false"))
   , ("lnot", SymForm "~"  "\x00ac")
   , ("land", SymForm "/\\"  "\x2227"), ("lor", SymForm "\\/"  "\x2228")
   , ("implies", SymForm "==>"  "\x27f9"), ("equiv", SymForm "=="  "\x2261")
