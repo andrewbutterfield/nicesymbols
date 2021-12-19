@@ -110,10 +110,10 @@ is as a result of conditional compilation.
 For now we only distinguish between Windows (aka \texttt{mingw32})
 and the rest.
 \begin{code}
-#ifdef mingw32_HOST_OS
+#ifdef NOT_NICE
 nicesym = aa_nicesym
 #endif
-#ifndef mingw32_HOST_OS
+#ifndef NOT_NICE
 nicesym = u8_nicesym
 #endif
 \end{code}
@@ -305,7 +305,7 @@ nicelength = length . stripANSI
 \subsection{Weight Conversion for Unix/OS X}
 
 \begin{code}
-#ifndef mingw32_HOST_OS
+#ifndef NOT_NICE
 \end{code}
 
 \begin{code}
@@ -323,7 +323,7 @@ color i str   = colorSGR i ++ str ++ resetSGR
 \subsection{Weight ``Conversion'' for Windows}
 
 \begin{code}
-#ifdef mingw32_HOST_OS
+#ifdef NOT_NICE
 \end{code}
 
 \begin{code}
@@ -345,7 +345,7 @@ color i str   = colorSGR i ++ str ++ resetSGR
 
 \begin{code}
 -- We need to to merge most of this as well
-#ifndef mingw32_HOST_OS
+#ifndef NOT_NICE
 \end{code}
 
 \begin{code}
@@ -466,7 +466,7 @@ cmathbb c
 \subsection{``Nice'' Symbols for Windows }
 
 \begin{code}
-#ifdef mingw32_HOST_OS
+#ifdef NOT_NICE
 \end{code}
 
 \begin{code}
@@ -497,7 +497,7 @@ _mathbb str = str
 \subsection{Diacritics for Unix/OS X}
 
 \begin{code}
-#ifndef mingw32_HOST_OS
+#ifndef NOT_NICE
 \end{code}
 
 \begin{code}
@@ -517,7 +517,7 @@ dia_lrarrow c = c:"\x20e1"
 \subsection{Diacritics for Windows}
 
 \begin{code}
-#ifdef mingw32_HOST_OS
+#ifdef NOT_NICE
 \end{code}
 
 We don't even try right now \dots
@@ -550,7 +550,7 @@ widthHelp = sequence_ (fmap (tstop . snd) niceSyms)
 \end{code}
 
 \begin{code}
-#ifndef mingw32_HOST_OS
+#ifndef NOT_NICE
 
 widthHack s cs = whack (replicate s ' ') cs
 
@@ -568,7 +568,7 @@ badWidths = _implies ++ _star ++ _fun ++ _pfun ++ _ffun ++ _maplet
 \subsection{Width Hack for Windows}
 
 \begin{code}
-#ifdef mingw32_HOST_OS
+#ifdef NOT_NICE
 
 widthHack _ = id
 #endif
